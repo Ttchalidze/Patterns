@@ -41,17 +41,13 @@ export function factorial(n) {
  * @returns `[]` if n is 0 or negative
  */
 export function buildNArray(n) {
-  if (typeof num !== "number" || isNaN(n)) {
+  if (typeof n !== "number" || isNaN(n)) {
     return null;
   }
   if (n < 1) {
     return [];
   }
-  const result = [];
-  for (let i = 1; i <= n; i++) {
-    result.push(i);
-  }
-  return result;
+  return Array.from({ length: n }, (v, i) => i + 1);
 }
 
 /**
@@ -59,10 +55,10 @@ export function buildNArray(n) {
  * @returns {string} the longest string in `strings`
  */
 export function getLongestString(strings) {
-  if (!Array.isArray(strings) || strings.length === 0) {
-    return "";
-  }
-  return strings.reduce((longest, current) => current.length > longest.length);
+  return strings.reduce(
+    (longest, current) => (current.length > longest.length ? current : longest),
+    ""
+  );
 }
 
 /**
@@ -70,13 +66,7 @@ export function getLongestString(strings) {
  * @returns {number} the number of students present
  */
 export function countPresent(attendance) {
-  let studentsnum = 0;
-  for (let i = 0; i < attendance.length; i++) {
-    if (attendance(i) === true) {
-      studentsnum++;
-    }
-  }
-  return studentsnum;
+  return attendance.filter((value) => value === true).length;
 }
 
 /**
