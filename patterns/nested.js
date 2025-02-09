@@ -63,13 +63,15 @@ export function countLetter(words, letter) {
   if (typeof letter !== "string") {
     return 0;
   }
-  let count = 0;
-  for (let word of words) {
-    for (let char of word) {
-      if (char.toLowerCase() === letter.toLowerCase()) {
-        count++;
-      }
-    }
-  }
-  return count;
+
+  return words.reduce((count, word) => {
+    return (
+      count +
+      word.split("").reduce((charCount, char) => {
+        return char.toLowerCase() === letter.toLowerCase()
+          ? charCount + 1
+          : charCount;
+      }, 0)
+    );
+  }, 0);
 }
