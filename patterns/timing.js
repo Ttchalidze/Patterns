@@ -35,17 +35,11 @@ export function isAllEven(numbers) {
  * @returns {boolean} whether there is enough food in the backpack to feed everyone
  */
 export function haveEnoughFood(backpack, people) {
-  if (!Array.isArray(backpack) || typeof peopleCount !== "number") {
-    return false;
-  }
-  if (peopleCount === 0) {
-    return true;
-  }
-  let foodCount = 0;
-  for (let item of backpack) {
-    if (item.category === "food") {
-      foodCount++;
-    }
-  }
-  return foodCount >= peopleCount;
+  if (people === 0) return true;
+
+  const foodCount = backpack.reduce(
+    (count, item) => (item.category === "food" ? count + 1 : count),
+    0
+  );
+  return foodCount >= people;
 }
